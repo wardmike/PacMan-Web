@@ -1,8 +1,19 @@
+function resizeCanvas() {
+  const canvas = document.getElementById("board");
+  canvas.width  = window.innerWidth;
+  canvas.height  = window.innerHeight;
+}
+
+window.addEventListener("load", resizeCanvas);
+window.addEventListener("resize", resizeCanvas);
+
 function startGame()
 {
     //myGameArea.start();
-    var canvas = document.getElementById("board");
+    const canvas = document.getElementById("board");
     canvas.style.backgroundColor = "#1b23b7";
+
+    pacmanDemo();
 }
 
 /*var myGameArea = {
