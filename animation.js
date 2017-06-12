@@ -1,3 +1,6 @@
+let spriteSheet = new Image();
+spriteSheet.src = 'pac_sprite_sheet.png'
+
 function pacmanDemo() {
   const canvas = document.getElementById("board");
   const context = canvas.getContext("2d");
@@ -15,6 +18,43 @@ function pacmanDemo() {
     open_left: new Arc(5*Math.PI/4, 3*Math.PI/4),
     closed_left: new Arc(Math.PI, 3*Math.PI)
   };
+
+  class Ghost { // Pac people could be any gender
+    constructor() {
+      this.x = 0;
+      this.y = 200;
+      this.direction = "right";
+      this.frame = 455;
+      this.lastFrame = undefined;
+      this.frameRate = 12; // per second
+      this.color = "red";
+      this.size = 100;
+    }
+
+    render(context) {
+       Graphics.drawTexture({
+           image : spriteSheet, 
+           center : {x : this.x,  y : this.y}, 
+           clip : { x: this.frame, y : 62 , width: 17, height: 17},
+           im : {width : 100, height : 80},
+           size : this.size,
+       });
+    }
+
+    update(time) {
+        if(this.frame === 455){
+            this.frame += 17;
+        }   
+        else{
+            this.frame -= 17;
+        }
+        if (this.x > canvas.width) // turn around
+          this.direction = "left";
+        else if (this.x < 0)
+          this.direction = "right"
+      }
+    }
+  
 
   class PacPerson { // Pac people could be any gender
     constructor() {
@@ -56,11 +96,14 @@ function pacmanDemo() {
   }
 
   var pacman = new PacPerson();
+  var redGhost = new Ghost();
 
   function render(time) {
     context.clearRect(0, 0, canvas.width, canvas.height);
     pacman.render(context);
     pacman.update(time);
+    redGhost.render(context);
+    redGhost.update(time);
     window.requestAnimationFrame(render);
   }
 
