@@ -1,9 +1,11 @@
 let spriteSheet = new Image();
 spriteSheet.src = 'pac_sprite_sheet.png'
 
+
 function pacmanDemo() {
   const canvas = document.getElementById("board");
   const context = canvas.getContext("2d");
+  Graphics.initialize();
 
   class Arc {
     constructor(start, end) {
@@ -31,7 +33,7 @@ function pacmanDemo() {
       this.size = 100;
     }
 
-    render(context) {
+    render() {
        Graphics.drawTexture({
            image : spriteSheet, 
            center : {x : this.x,  y : this.y}, 
@@ -48,12 +50,14 @@ function pacmanDemo() {
         else{
             this.frame -= 17;
         }
-        if (this.x > canvas.width) // turn around
+        if (this.x > canvas.width){ // turn around
           this.direction = "left";
-        else if (this.x < 0)
+        }
+        else if (this.x < 0){
           this.direction = "right"
       }
     }
+  }
   
 
   class PacPerson { // Pac people could be any gender
@@ -102,7 +106,7 @@ function pacmanDemo() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     pacman.render(context);
     pacman.update(time);
-    redGhost.render(context);
+    redGhost.render();
     redGhost.update(time);
     window.requestAnimationFrame(render);
   }
