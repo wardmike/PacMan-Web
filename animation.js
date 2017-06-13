@@ -22,11 +22,26 @@ function pacmanDemo() {
   };
 
   class Ghost { // Pac people could be any gender
-    constructor() {
+    constructor(color) {
       this.x = 0;
-      this.y = 200;
       this.direction = "right";
-      this.frame = 455;
+      this.frame = 456;
+      if(color === "red"){
+       this.y_offset = 65;
+       this.y = 200;
+      }
+      else if(color === "pink"){
+       this.y_offset = 80; 
+       this.y = 300;
+      }
+      else if(color === "blue"){
+       this.y_offset = 96; 
+       this.y = 400;
+      }
+      else if(color === "orange"){
+       this.y_offset = 112; 
+       this.y = 500;
+      }
       this.lastFrame = undefined;
       this.frameRate = 12; // per second
       this.color = "red";
@@ -37,19 +52,31 @@ function pacmanDemo() {
        Graphics.drawTexture({
            image : spriteSheet, 
            center : {x : this.x,  y : this.y}, 
-           clip : { x: this.frame, y : 62 , width: 17, height: 17},
+           clip : { x: this.frame, y : this.y_offset , width: 15, height: 15},
            im : {width : 100, height : 80},
            size : this.size,
        });
     }
 
     update(time) {
-        if(this.frame === 455){
-            this.frame += 17;
+      if (this.lastFrame === undefined)
+        this.lastFrame = time;
+      else if ((time - this.lastFrame) / 1000 > 1 / this.frameRate) {
+        if(this.frame === 456 && this.direction === "right"){
+            this.frame += 16;
         }   
-        else{
-            this.frame -= 17;
+        else if(this.direction === "right"){
+            this.frame -= 16;
         }
+        else if(this.direction === "left" && this.frame != 488){
+            this.frame = 488; 
+        }
+        else{
+            this.frame += 16;
+        }
+        this.lastFrame = time;
+        this.x += this.size / 8 * (this.direction === "right" ? 1 : -1);
+      }
         if (this.x > canvas.width){ // turn around
           this.direction = "left";
         }
@@ -100,7 +127,10 @@ function pacmanDemo() {
   }
 
   var pacman = new PacPerson();
-  var redGhost = new Ghost();
+  var redGhost = new Ghost("red");
+  var pinkGhost = new Ghost("pink");
+  var blueGhost = new Ghost("blue");
+  var orangeGhost = new Ghost("orange");
 
   function render(time) {
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -108,6 +138,12 @@ function pacmanDemo() {
     pacman.update(time);
     redGhost.render();
     redGhost.update(time);
+    pinkGhost.render();
+    pinkGhost.update(time);
+    blueGhost.render();
+    blueGhost.update(time);
+    orangeGhost.render();
+    orangeGhost.update(time);
     window.requestAnimationFrame(render);
   }
 
