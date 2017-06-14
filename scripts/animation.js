@@ -1,5 +1,5 @@
 let spriteSheet = new Image();
-spriteSheet.src = 'pac_sprite_sheet.png'
+spriteSheet.src = 'img/pac_sprite_sheet.png'
 
 
 function pacmanDemo() {
