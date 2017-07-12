@@ -1,5 +1,6 @@
 let spriteSheet = new Image();
-spriteSheet.src = 'img/pac_sprite_sheet.png'
+{% load static %}
+spriteSheet.src = '{% static "img/pac_sprite_sheet.png" %}'
 
 
 function pacmanDemo() {
