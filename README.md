@@ -5,24 +5,28 @@ Web app of classic game PacMan
 - None!
 
 ## Phase One: Server Setup
-- choose server backend: socket.io & Flask, Django, or Node.js??
-- set up server on Heroku
-- get simple request/response for server to display static page
+- [x] choose server backend: Tornado, possibly with SocketJS or socket.io
+- [x] set up server on Heroku
+- [ ] get simple request/response for server to display static page
 
-## Phase Two: Static Game
-- single-player PacMan
-- game to perform as a static website game
+## Phase Two: Single-Player Game
+- single-player PacMan with logic done on server
+
+## Phase Three: Multiplayer
+- server handles multiple players playing together
 
 
-## Phase Three: Server Saves Info
-- server will have a database to store user's info
-- info will be high scores, etc.
+## Phase Four: Ghosts
+- add in Ghosts with simple logic
 
-## Phase Four: Single-Player Server
-- have calculations be done on server --> to prepare for multiplayer
+## Phase Five: Smart Ghosts
+- ghosts have artificial intelligence
 
-## Phase Five: Multiplayer
-- multiplayer game with logic done on server
+## Phase Six: Random Mazes
+- random maze generation 
+
+## Phase Seven: Even More Mazes!
+- mazes based on actual locations - Bay Area map!
 
 
 ## Planned Features
@@ -30,8 +34,6 @@ Web app of classic game PacMan
 - Controllable PacMan
 - Ghosts
 - Maze Generation
-
-## Possible Features
 - Multiplayer
 - Controllable Miss PacMan
 - Artificial Intelligence for Ghosts
