@@ -2,15 +2,57 @@
 <html>
 <head>
 	<title>PacMan</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="css/main.css"/>
 </head>
 <body>
 	<button onclick="startGame()">Start Game</button>
   <canvas id="board"></canvas>
-  	<script src="scripts/input/input.js"></script>
-	<script src="scripts/input/renderer.js"></script>
     <script src="scripts/graphics.js"></script>
 	<script src="scripts/animation.js"></script>
 	<script src="scripts/main.js"></script>
+	<script>
+		var inGame = false;
+		document.addEventListener('keydown', function(event) {
+		    if(event.keyCode == 37) {
+		    	if (inGame) {
+		    		pacman.turn("left");
+		    	}
+		    }
+		    else if(event.keyCode == 39) {
+		    	if (inGame) {
+		    		pacman.turn("right");
+		    	}
+		    }
+		});
+		const canvas = document.getElementById("board");
+  		const context = canvas.getContext("2d");
+		function render(time) {
+			if (inGame) {
+				context.clearRect(0, 0, canvas.width, canvas.height);
+		    pacman.render(context);
+		    pacman.update(time);
+		    /*redGhost.render();
+		    redGhost.update(time);
+		    pinkGhost.render();
+		    pinkGhost.update(time);
+		    blueGhost.render();
+		    blueGhost.update(time);
+		    orangeGhost.render();
+		    orangeGhost.update(time);*/
+		    window.requestAnimationFrame(render);
+			}
+		  }
+
+		function startGame() {
+			//myGameArea.start();
+	    	const canvas = document.getElementById("board");
+	    	canvas.style.backgroundColor = "#1b23b7";
+	    	inGame = true;
+	    	pacmanDemo();
+	    	pacman = new PacMan();
+		}
+
+		
+	</script>
 </body>
 </html>

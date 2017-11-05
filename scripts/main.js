@@ -7,14 +7,14 @@ function resizeCanvas() {
 window.addEventListener("load", resizeCanvas);
 window.addEventListener("resize", resizeCanvas);
 
-function startGame()
+/*function startGame()
 {
     //myGameArea.start();
     const canvas = document.getElementById("board");
     canvas.style.backgroundColor = "#1b23b7";
 
     pacmanDemo();
-}
+}*/
 
 /*var myGameArea = {
     canvas : document.createElement("canvas"),
